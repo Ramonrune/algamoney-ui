@@ -1,3 +1,4 @@
+import { SharedModule } from './../shared/shared.module';
 import { InputMaskModule } from 'primeng/components/inputmask/inputmask';
 import { TooltipModule } from 'primeng/components/tooltip/tooltip';
 import { DataTableModule } from 'primeng/components/datatable/datatable';
@@ -19,6 +20,7 @@ import { CommonModule } from '@angular/common';
     DataTableModule,
     TooltipModule,
     InputMaskModule,
+    SharedModule
   ],
   declarations: [
     PessoasPesquisaComponent,
