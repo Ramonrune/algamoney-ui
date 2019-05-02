@@ -17,7 +17,6 @@ export class LancamentosPesquisaComponent implements OnInit {
   constructor(private lancamentoService: LancamentoService) { }
 
   ngOnInit() {
-    //this.pesquisar();
   }
 
   pesquisar(pagina = 0) {
@@ -32,6 +31,8 @@ export class LancamentosPesquisaComponent implements OnInit {
   }
 
   aoMudarPagina(event: LazyLoadEvent) {
+    const pagina = event.first / event.rows;
+    this.pesquisar(pagina);
     console.log(event);
   }
 
