@@ -5,7 +5,6 @@ import { DataTableModule } from 'primeng/components/datatable/datatable';
 import { ButtonModule } from 'primeng/components/button/button';
 import { InputTextModule } from 'primeng/components/inputtext/inputtext';
 import { FormsModule } from '@angular/forms';
-import { PessoasGridComponent } from './pessoas-grid/pessoas-grid.component';
 import { PessoaCadastroComponent } from './pessoa-cadastro/pessoa-cadastro.component';
 import { PessoasPesquisaComponent } from './pessoas-pesquisa/pessoas-pesquisa.component';
 import { NgModule } from '@angular/core';
@@ -24,9 +23,8 @@ import { CommonModule } from '@angular/common';
   ],
   declarations: [
     PessoasPesquisaComponent,
-    PessoaCadastroComponent,
-    PessoasGridComponent
-  ],
+    PessoaCadastroComponent
+    ],
   exports: [
     PessoaCadastroComponent,
     PessoasPesquisaComponent

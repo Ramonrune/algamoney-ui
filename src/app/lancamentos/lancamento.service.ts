@@ -53,7 +53,6 @@ export class LancamentoService {
         const resultado = {
           lancamentos,
           total: responseJson.totalElements
-
         }
 
         return resultado;
