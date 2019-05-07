@@ -10,6 +10,8 @@ import { CoreModule } from './core/core.module';
 import { PessoasModule } from './pessoas/pessoas.module';
 import { LancamentosModule } from './lancamentos/lancamentos.module';
 
+import { ToastyModule } from 'ng2-toasty';
+
 @NgModule({
   declarations: [
     AppComponent
@@ -20,7 +22,9 @@ import { LancamentosModule } from './lancamentos/lancamentos.module';
     CoreModule,
     LancamentosModule,
     PessoasModule,
-    HttpModule
+    HttpModule,
+
+    ToastyModule.forRoot()
 
   ],
   providers: [LancamentoService, PessoaService],
