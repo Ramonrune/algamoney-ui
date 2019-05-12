@@ -62,7 +62,7 @@ export class LancamentosPesquisaComponent implements OnInit {
       } else {
         this.grid.first = 0;
       }
-      this.toasty.success('Lançamento excluido com sucesso!');
+      this.toasty.success('Lançamento excluído com sucesso!');
 
     }).catch(erro => this.errorHandler.handle(erro));
 
