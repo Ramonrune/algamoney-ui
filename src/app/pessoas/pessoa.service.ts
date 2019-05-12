@@ -70,8 +70,17 @@ export class PessoaService {
 
     headers.append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
 
-    console.log(`${this.pessoasUrl}/${codigo}`)
     return this.http.delete(`${this.pessoasUrl}/${codigo}`, {headers}).toPromise().then( () => null);
   }
+
+  mudarStatus(codigo: number, status: boolean): Promise<void> {
+    const headers = new Headers();
+
+    headers.append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
+    headers.append('Content-Type', 'application/json');
+
+    return this.http.put(`${this.pessoasUrl}/${codigo}/ativo`, status, {headers}).toPromise().then( () => null);
+  }
+
 
 }

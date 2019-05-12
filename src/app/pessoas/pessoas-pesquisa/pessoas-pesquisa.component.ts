@@ -53,10 +53,10 @@ export class PessoasPesquisaComponent {
     });
   }
 
-  excluir(lancamento: any) {
+  excluir(pessoa: any) {
 
 
-    this.pessoaService.excluir(lancamento.codigo).then(() => {
+    this.pessoaService.excluir(pessoa.codigo).then(() => {
       if (this.grid.first === 0) {
         this.pesquisar();
       } else {
@@ -66,6 +66,20 @@ export class PessoasPesquisaComponent {
 
     }).catch(erro => this.errorHandler.handle(erro));
 
+  }
+
+
+  mudarStatus(pessoa: any) {
+    console.log(pessoa);
+    this.pessoaService.mudarStatus(pessoa.codigo, !pessoa.ativo).then(() => {
+      if (this.grid.first === 0) {
+        this.pesquisar();
+      } else {
+        this.grid.first = 0;
+      }
+      this.toasty.success('Pessoa ' + (!pessoa.ativo === true ? 'ativada' : 'desativada') + ' com sucesso!');
+
+    }).catch(erro => this.errorHandler.handle(erro));
   }
 
 
