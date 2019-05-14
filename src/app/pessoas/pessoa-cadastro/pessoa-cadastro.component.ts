@@ -1,4 +1,7 @@
+import { ToastyService } from 'ng2-toasty';
+import { PessoaService } from './../pessoa.service';
 import { Component, OnInit } from '@angular/core';
+import { ErrorHandlerService } from 'app/core/error-handler.service';
 
 @Component({
   selector: 'app-pessoa-cadastro',
@@ -7,9 +10,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PessoaCadastroComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private pessoaService: PessoaService,
+    private toasty: ToastyService,
+    private errorHandler: ErrorHandlerService
+  ) { }
 
   ngOnInit() {
   }
+
 
 }
