@@ -7,6 +7,7 @@ import { CategoriasService } from './../../categorias/categorias.service';
 import { Component, OnInit } from '@angular/core';
 import { ToastyService } from 'ng2-toasty';
 import { ActivatedRoute } from '@angular/router';
+import { errorHandler } from '@angular/platform-browser/src/browser';
 
 @Component({
   selector: 'app-lancamento-cadastro',
@@ -57,6 +58,9 @@ export class LancamentoCadastroComponent implements OnInit {
   }
 
 
+  get editando() {
+    return Boolean(this.lancamento.codigo);
+  }
 
 
   carregarLancamento(codigo: number) {
@@ -67,6 +71,15 @@ export class LancamentoCadastroComponent implements OnInit {
   }
 
   salvar(form: FormControl) {
+    if (this.editando) {
+      this.atualizarLancamento(form);
+    } else {
+      this.adicionarLancamento(form);
+    }
+
+  }
+
+  adicionarLancamento(form: FormControl) {
     this.lancamentoService.adicionar(this.lancamento)
       .then(() => {
         this.toasty.success('Lançamento adicionado com sucesso!');
@@ -74,7 +87,18 @@ export class LancamentoCadastroComponent implements OnInit {
         this.lancamento = new Lancamento();
 
       }).catch(erro => this.errorHandler.handle(erro));
-    console.log(this.lancamento);
+  }
+
+  atualizarLancamento(form: FormControl) {
+    this.lancamentoService.atualizar(this.lancamento)
+      .then(lancamento => {
+        this.lancamento = lancamento;
+
+        this.toasty.success('Lançamento alterado com sucesso!');
+
+
+      })
+      .catch(erro => this.errorHandler.handle(erro))
   }
 
   carregarCategorias() {
