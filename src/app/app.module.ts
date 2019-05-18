@@ -15,6 +15,7 @@ import { LancamentosModule } from './lancamentos/lancamentos.module';
 import { PessoasPesquisaComponent } from './pessoas/pessoas-pesquisa/pessoas-pesquisa.component';
 
 const routes: Routes = [
+  { path: '', redirectTo: 'lancamentos', pathMatch: 'full'},
   { path: 'lancamentos', component: LancamentosPesquisaComponent},
   { path: 'lancamentos/novo', component: LancamentoCadastroComponent},
   { path: 'lancamentos/:codigo', component: LancamentoCadastroComponent},
