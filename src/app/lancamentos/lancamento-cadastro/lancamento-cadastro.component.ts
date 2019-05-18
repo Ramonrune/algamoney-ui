@@ -6,7 +6,7 @@ import { ErrorHandlerService } from 'app/core/error-handler.service';
 import { CategoriasService } from './../../categorias/categorias.service';
 import { Component, OnInit } from '@angular/core';
 import { ToastyService } from 'ng2-toasty';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { errorHandler } from '@angular/platform-browser/src/browser';
 
 @Component({
@@ -34,7 +34,8 @@ export class LancamentoCadastroComponent implements OnInit {
     private pessoaService: PessoaService,
     private toasty: ToastyService,
     private errorHandler: ErrorHandlerService,
-    private route: ActivatedRoute) {
+    private route: ActivatedRoute,
+    private router: Router) {
 
 
   }
@@ -81,13 +82,23 @@ export class LancamentoCadastroComponent implements OnInit {
 
   adicionarLancamento(form: FormControl) {
     this.lancamentoService.adicionar(this.lancamento)
-      .then(() => {
+      .then(lanc => {
         this.toasty.success('Lançamento adicionado com sucesso!');
-        form.reset();
-        this.lancamento = new Lancamento();
+        // form.reset();
+        // this.lancamento = new Lancamento();
+        this.router.navigate(['/lancamentos', lanc.codigo]);
 
       }).catch(erro => this.errorHandler.handle(erro));
   }
+
+  novo(form: FormControl) {
+    this.lancamento = new Lancamento();
+
+    form.reset(this.lancamento);
+
+    this.router.navigate(['/lancamentos/novo']);
+  }
+
 
   atualizarLancamento(form: FormControl) {
     this.lancamentoService.atualizar(this.lancamento)
