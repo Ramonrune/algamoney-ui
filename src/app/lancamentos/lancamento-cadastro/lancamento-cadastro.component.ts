@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 import { ToastyService } from 'ng2-toasty';
 import { ActivatedRoute, Router } from '@angular/router';
 import { errorHandler } from '@angular/platform-browser/src/browser';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-lancamento-cadastro',
@@ -35,7 +36,8 @@ export class LancamentoCadastroComponent implements OnInit {
     private toasty: ToastyService,
     private errorHandler: ErrorHandlerService,
     private route: ActivatedRoute,
-    private router: Router) {
+    private router: Router,
+    private title: Title) {
 
 
   }
@@ -51,6 +53,8 @@ export class LancamentoCadastroComponent implements OnInit {
       this.titulo = 'Editar lançamento';
     } else {
       this.titulo = 'Novo lançamento';
+      this.title.setTitle(this.titulo);
+
     }
 
 
@@ -58,6 +62,9 @@ export class LancamentoCadastroComponent implements OnInit {
     this.carregarPessoas();
   }
 
+  atualizarTituloEdicao() {
+    this.title.setTitle(`Edição de lançamento: ${this.lancamento.descricao}`);
+  }
 
   get editando() {
     return Boolean(this.lancamento.codigo);
@@ -67,6 +74,8 @@ export class LancamentoCadastroComponent implements OnInit {
   carregarLancamento(codigo: number) {
     this.lancamentoService.buscaPorCodigo(codigo).then(lancamento => {
       this.lancamento = lancamento;
+      this.atualizarTituloEdicao();
+
     })
     .catch(erro => this.errorHandler.handle(erro));
   }
@@ -107,6 +116,7 @@ export class LancamentoCadastroComponent implements OnInit {
 
         this.toasty.success('Lançamento alterado com sucesso!');
 
+        this.atualizarTituloEdicao();
 
       })
       .catch(erro => this.errorHandler.handle(erro))
