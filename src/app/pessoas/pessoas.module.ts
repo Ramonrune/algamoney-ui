@@ -1,3 +1,4 @@
+import { PessoasRoutingModule } from './pessoas-routing.module';
 import { SharedModule } from './../shared/shared.module';
 import { InputMaskModule } from 'primeng/components/inputmask/inputmask';
 import { TooltipModule } from 'primeng/components/tooltip/tooltip';
@@ -9,13 +10,12 @@ import { PessoaCadastroComponent } from './pessoa-cadastro/pessoa-cadastro.compo
 import { PessoasPesquisaComponent } from './pessoas-pesquisa/pessoas-pesquisa.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
-    RouterModule,
+    PessoasRoutingModule,
 
     InputTextModule,
     ButtonModule,

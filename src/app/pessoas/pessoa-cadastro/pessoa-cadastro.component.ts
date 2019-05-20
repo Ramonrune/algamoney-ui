@@ -1,10 +1,11 @@
+import { ActivatedRoute, Router } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 import { FormControl } from '@angular/forms';
 import { Pessoa } from './../../core/model';
 import { ToastyService } from 'ng2-toasty';
 import { PessoaService } from './../pessoa.service';
 import { Component, OnInit } from '@angular/core';
 import { ErrorHandlerService } from 'app/core/error-handler.service';
-import { errorHandler } from '@angular/platform-browser/src/browser';
 
 @Component({
   selector: 'app-pessoa-cadastro',
@@ -16,24 +17,93 @@ export class PessoaCadastroComponent implements OnInit {
 
   pessoa = new Pessoa();
 
+  titulo: string;
+
   constructor(
     private pessoaService: PessoaService,
     private toasty: ToastyService,
-    private errorHandler: ErrorHandlerService
+    private errorHandler: ErrorHandlerService,
+    private route: ActivatedRoute,
+    private router: Router,
+    private title: Title
   ) { }
 
   ngOnInit() {
+
+    const codigoPessoa = this.route.snapshot.params['codigo'];
+    if (codigoPessoa) {
+      this.carregarPessoa(codigoPessoa);
+      this.titulo = 'Editar pessoa';
+    } else {
+      this.titulo = 'Nova Pessoa';
+      this.title.setTitle(this.titulo);
+
+    }
+
+
+  }
+
+
+  carregarPessoa(codigo: number) {
+    this.pessoaService.buscaPorCodigo(codigo)
+      .then(pessoa => {
+        this.pessoa = pessoa;
+        this.atualizarTituloEdicao();
+      })
+      .catch(erro => this.errorHandler.handle(erro));
+  }
+
+
+  atualizarTituloEdicao() {
+    this.title.setTitle(`Edição de pessoa: ${this.pessoa.nome}`);
+  }
+
+
+  get editando() {
+    return Boolean(this.pessoa.codigo);
   }
 
   salvar(pessoaForm: FormControl) {
-    this.pessoaService.salvar(this.pessoa)
-      .then( () => {
-        this.toasty.success('Pessoa adicionada com sucesso!');
-        pessoaForm.reset();
-        this.pessoa = new Pessoa();
-      })
-      .catch(erro => this.errorHandler.handle(erro));
+    if (this.editando) {
+      this.atualizarPessoa(pessoaForm);
+    } else {
+       this.adicionarPessoa(pessoaForm);
+    }
 
+  }
+
+
+  adicionarPessoa(pessoaForm: FormControl) {
+    this.pessoaService.salvar(this.pessoa)
+    .then(pessoa => {
+      this.toasty.success('Pessoa adicionada com sucesso!');
+      this.router.navigate(['/pessoas', pessoa.codigo]);
+
+    })
+    .catch(erro => this.errorHandler.handle(erro));
+  }
+
+
+  atualizarPessoa(pessoaForm: FormControl) {
+    this.pessoaService.atualizar(this.pessoa)
+      .then(pessoa => {
+        this.pessoa = pessoa;
+
+        this.toasty.success('Pessoa alterada com sucesso!');
+
+        this.atualizarTituloEdicao();
+
+      })
+      .catch(erro => this.errorHandler.handle(erro))
+  }
+
+
+  novo(form: FormControl) {
+    this.pessoa = new Pessoa();
+
+    form.reset(this.pessoa);
+
+    this.router.navigate(['/pessoas/nova']);
   }
 
 }
