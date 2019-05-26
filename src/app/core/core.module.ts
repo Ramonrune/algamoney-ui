@@ -1,3 +1,4 @@
+import { AuthService } from './../seguranca/auth.service';
 import { CategoriasService } from './../categorias/categorias.service';
 import { NgModule, LOCALE_ID } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -36,6 +37,7 @@ import { Title } from '@angular/platform-browser';
     PessoaService,
     CategoriasService,
     ConfirmationService,
+    AuthService,
     Title,
     { provide: LOCALE_ID, useValue: 'pt-BR' },
     ErrorHandlerService],
