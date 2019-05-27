@@ -14,6 +14,7 @@ import { LancamentoService } from './../lancamentos/lancamento.service';
 import { RouterModule } from '@angular/router';
 import { PaginaNaoEncontradaComponent } from './pagina-nao-encontrada.component';
 import { Title } from '@angular/platform-browser';
+import { JwtHelper } from 'angular2-jwt';
 
 
 @NgModule({
@@ -38,6 +39,7 @@ import { Title } from '@angular/platform-browser';
     CategoriasService,
     ConfirmationService,
     AuthService,
+    JwtHelper,
     Title,
     { provide: LOCALE_ID, useValue: 'pt-BR' },
     ErrorHandlerService],
