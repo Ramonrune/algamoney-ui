@@ -36,7 +36,9 @@ export class PessoasPesquisaComponent implements OnInit {
     this.pessoaService.pesquisar(this.filtro).then(response => {
       this.pessoas = response.pessoas;
       this.totalRegistros = response.total
-    });
+    })
+    .catch(erro => this.errorHandler.handle(erro));
+
 
   }
 
