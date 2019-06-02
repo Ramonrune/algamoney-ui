@@ -13,8 +13,8 @@ export class AuthService {
   constructor(
     private http: Http,
     private jwtHelper: JwtHelper) {
-      this.carregarToken();
-    }
+    this.carregarToken();
+  }
 
   login(usuario: string, senha: string): Promise<void> {
     const headers = new Headers();
@@ -23,7 +23,7 @@ export class AuthService {
 
     const body = `username=${usuario}&password=${senha}&grant_type=password`;
 
-    return this.http.post(this.oauthTokenUrl, body, {headers, withCredentials: true})
+    return this.http.post(this.oauthTokenUrl, body, { headers, withCredentials: true })
       .toPromise()
       .then(response => {
         this.armazenarToken(response.json().access_token);
@@ -65,7 +65,7 @@ export class AuthService {
     headers.append('Content-Type', 'application/x-www-form-urlencoded');
     headers.append('Authorization', 'Basic YW5ndWxhcjphbmd1bGFy');
 
-    return this.http.post(this.oauthTokenUrl, body, {headers, withCredentials: true})
+    return this.http.post(this.oauthTokenUrl, body, { headers, withCredentials: true })
       .toPromise()
       .then(response => {
         this.armazenarToken(response.json().access_token);
@@ -83,5 +83,15 @@ export class AuthService {
 
   temPermissao(permissao: string) {
     return this.jwtPayload && this.jwtPayload.authorities.includes(permissao);
+  }
+
+  temQualquerPermissao(roles) {
+    for (const role of roles) {
+      if (this.temPermissao(role)) {
+        return true;
+      }
+    }
+
+    return false;
   }
 }

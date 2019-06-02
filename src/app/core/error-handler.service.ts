@@ -19,6 +19,11 @@ export class ErrorHandlerService {
 
     if (errorResponse instanceof Response && errorResponse.status >= 400 && errorResponse.status <= 499) {
       msg = 'Erro ao processar serviço remoto. Tente novamente';
+
+      if (errorResponse.status === 403) {
+        msg = 'Você não tem permissão para executar essa ação';
+      }
+
       let erros;
       try {
         erros = errorResponse.json();
