@@ -1,11 +1,16 @@
+import { NotAuthenticatedError } from './../seguranca/money-http';
+import { Router } from '@angular/router';
 import { ToastyService } from 'ng2-toasty';
 import { Response } from '@angular/http';
 import { Injectable } from '@angular/core';
+import { AuthHttpError } from 'angular2-jwt';
 
 @Injectable()
 export class ErrorHandlerService {
 
-  constructor(private toastyService: ToastyService) { }
+  constructor(
+    private router: Router,
+    private toastyService: ToastyService) { }
 
   handle(errorResponse: any) {
     let msg: string;
@@ -15,6 +20,13 @@ export class ErrorHandlerService {
     if (typeof errorResponse === 'string') {
       msg = errorResponse;
       generic = false;
+    }
+
+    if (errorResponse instanceof NotAuthenticatedError) {
+      msg = 'Sua sessão expirou!';
+      generic = false;
+      this.router.navigate(['/login']);
+
     }
 
     if (errorResponse instanceof Response && errorResponse.status >= 400 && errorResponse.status <= 499) {
