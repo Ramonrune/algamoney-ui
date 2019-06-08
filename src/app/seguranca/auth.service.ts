@@ -80,6 +80,11 @@ export class AuthService {
 
   }
 
+  limparAccessToken() {
+    localStorage.removeItem('token');
+    this.jwtPayload = null;
+  }
+
 
   temPermissao(permissao: string) {
     return this.jwtPayload && this.jwtPayload.authorities.includes(permissao);
