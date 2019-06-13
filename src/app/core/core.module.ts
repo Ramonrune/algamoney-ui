@@ -1,7 +1,8 @@
 import { AuthService } from './../seguranca/auth.service';
 import { CategoriasService } from './../categorias/categorias.service';
 import { NgModule, LOCALE_ID } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, registerLocaleData } from '@angular/common';
+import localePt from '@angular/common/locales/pt';
 
 import { ToastyModule } from 'ng2-toasty';
 import { ConfirmDialogModule } from 'primeng/components/confirmdialog/confirmdialog';
@@ -17,6 +18,7 @@ import { Title } from '@angular/platform-browser';
 import { JwtHelper } from 'angular2-jwt';
 import { NaoAutorizadoComponent } from './nao-autorizado.component';
 
+registerLocaleData(localePt);
 
 @NgModule({
   imports: [
@@ -43,7 +45,7 @@ import { NaoAutorizadoComponent } from './nao-autorizado.component';
     AuthService,
     JwtHelper,
     Title,
-    { provide: LOCALE_ID, useValue: 'pt-BR' },
+    { provide: LOCALE_ID, useValue: 'pt' },
     ErrorHandlerService],
 })
 export class CoreModule { }
