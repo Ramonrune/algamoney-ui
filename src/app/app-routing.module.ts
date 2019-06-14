@@ -4,6 +4,9 @@ import { Routes, RouterModule } from '@angular/router';
 import { NaoAutorizadoComponent } from './core/nao-autorizado.component';
 
 const routes: Routes = [
+  { path: 'lancamentos', loadChildren: 'app/lancamentos/lancamentos.module#LancamentosModule'},
+  { path: 'pessoas', loadChildren: 'app/pessoas/pessoas.module#PessoasModule'},
+
   { path: '', redirectTo: 'lancamentos', pathMatch: 'full'},
   { path: 'pagina-nao-encontrada', component: PaginaNaoEncontradaComponent},
   { path: 'nao-autorizado', component: NaoAutorizadoComponent},
