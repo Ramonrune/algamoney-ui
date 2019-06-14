@@ -41,3 +41,17 @@ label{
 .ui-dropdown-filter-container{
   width: 100%;
 }
+
+
+.col-valor-header{
+  width: 120px;
+}
+
+
+.col-data-header{
+  width: 120px;
+}
+
+.col-acoes-header{
+  width: 120px;
+}
