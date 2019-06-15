@@ -98,7 +98,7 @@ export class LancamentoCadastroComponent implements OnInit {
   carregarLancamento(codigo: number) {
     this.lancamentoService.buscaPorCodigo(codigo).then(lancamento => {
       // this.lancamento = lancamento;
-      this.formulario .setValue(lancamento)
+      this.formulario.patchValue(lancamento)
       this.atualizarTituloEdicao();
 
     })
@@ -129,7 +129,7 @@ export class LancamentoCadastroComponent implements OnInit {
     this.lancamentoService.atualizar(this.formulario.value)
       .then(lancamento => {
         // this.lancamento = lancamento;
-        this.formulario.setValue(lancamento);
+        this.formulario.patchValue(lancamento);
         this.toasty.success('Lançamento alterado com sucesso!');
 
         this.atualizarTituloEdicao();
@@ -140,6 +140,7 @@ export class LancamentoCadastroComponent implements OnInit {
 
   novo() {
     this.formulario.reset();
+    this.formulario.get('tipo').setValue('RECEITA');
 
     setTimeout(function() {
       this.lancamento = new Lancamento();
