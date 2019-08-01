@@ -17,6 +17,7 @@ import { PaginaNaoEncontradaComponent } from './pagina-nao-encontrada.component'
 import { Title } from '@angular/platform-browser';
 import { JwtHelper } from 'angular2-jwt';
 import { NaoAutorizadoComponent } from './nao-autorizado.component';
+import { DashboardService } from 'app/dashboard/dashboard.service';
 
 registerLocaleData(localePt);
 
@@ -38,6 +39,7 @@ registerLocaleData(localePt);
     ConfirmDialogModule
   ],
   providers: [
+    DashboardService,
     LancamentoService,
     PessoaService,
     CategoriasService,
