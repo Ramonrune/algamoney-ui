@@ -18,6 +18,7 @@ import { Title } from '@angular/platform-browser';
 import { JwtHelper } from 'angular2-jwt';
 import { NaoAutorizadoComponent } from './nao-autorizado.component';
 import { DashboardService } from 'app/dashboard/dashboard.service';
+import { RelatoriosService } from 'app/relatorios/relatorios.service';
 
 registerLocaleData(localePt);
 
@@ -40,6 +41,7 @@ registerLocaleData(localePt);
   ],
   providers: [
     DashboardService,
+    RelatoriosService,
     LancamentoService,
     PessoaService,
     CategoriasService,

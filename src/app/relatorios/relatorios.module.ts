@@ -1,3 +1,5 @@
+import { CalendarModule } from 'primeng/calendar';
+import { FormsModule } from '@angular/forms';
 import { SharedModule } from './../shared/shared.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -8,8 +10,10 @@ import { RelatorioLancamentosComponent } from './relatorio-lancamentos/relatorio
 @NgModule({
   imports: [
     CommonModule,
+    FormsModule,
     SharedModule,
-    RelatoriosRoutingModule
+    RelatoriosRoutingModule,
+    CalendarModule
   ],
   declarations: [RelatorioLancamentosComponent]
 })
