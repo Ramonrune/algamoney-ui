@@ -16,6 +16,7 @@ export class PessoaCadastroComponent implements OnInit {
 
 
   pessoa = new Pessoa();
+  exibindoFormularioContato = false;
 
   titulo: string;
 
@@ -41,6 +42,10 @@ export class PessoaCadastroComponent implements OnInit {
     }
 
 
+  }
+
+  prepararNovoContato() {
+    this.exibindoFormularioContato = true;
   }
 
 
