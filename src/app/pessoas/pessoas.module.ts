@@ -1,3 +1,4 @@
+import { PanelModule } from 'primeng/panel';
 import { PessoasRoutingModule } from './pessoas-routing.module';
 import { SharedModule } from './../shared/shared.module';
 import { InputMaskModule } from 'primeng/inputmask';
@@ -22,6 +23,7 @@ import { CommonModule } from '@angular/common';
     TableModule,
     TooltipModule,
     InputMaskModule,
+    PanelModule,
     SharedModule
   ],
   declarations: [
