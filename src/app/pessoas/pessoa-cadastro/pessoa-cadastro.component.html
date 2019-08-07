@@ -100,7 +100,7 @@
                     <td>{{contato.telefone}}</td>
                     <td class="col-acoes">
                       <button pButton icon="fa-pencil" type="button" pTooltip="Editar" tooltipPosition="top" (click)="prepararEdicaoContato(contato, rowIndex)"></button>
-                      <button pButton icon="fa-trash" type="button" pTooltip="Excluir" tooltipPosition="top"></button>
+                      <button pButton icon="fa-trash" type="button" pTooltip="Excluir" tooltipPosition="top" (click)="removerContato(rowIndex)"></button>
 
                     </td>
                   </tr>
