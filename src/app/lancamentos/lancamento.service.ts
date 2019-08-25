@@ -3,7 +3,7 @@ import { AuthHttp } from 'angular2-jwt';
 import { Lancamento } from './../core/model';
 
 import { Injectable } from '@angular/core';
-import { URLSearchParams} from '@angular/http';
+import { URLSearchParams } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 import * as moment from 'moment';
 
@@ -24,7 +24,12 @@ export class LancamentoService {
 
   constructor(private http: AuthHttp) {
     this.lancamentosUrl = `${environment.apiUrl}/lancamentos`;
-   }
+  }
+
+
+  urlUploadAnexo(): string {
+    return `${this.lancamentosUrl}/anexo`;
+  }
 
   pesquisar(filtro: LancamentoFiltro): Promise<any> {
     const params = new URLSearchParams();
@@ -46,7 +51,7 @@ export class LancamentoService {
     }
 
     return this.http.get(`${this.lancamentosUrl}?resumo`,
-      { search: params})
+      { search: params })
       .toPromise()
       .then(response => {
         const responseJson = response.json();
@@ -62,7 +67,7 @@ export class LancamentoService {
   }
 
   excluir(codigo: number): Promise<void> {
-    return this.http.delete(`${this.lancamentosUrl}/${codigo}`).toPromise().then( () => null);
+    return this.http.delete(`${this.lancamentosUrl}/${codigo}`).toPromise().then(() => null);
   }
 
   adicionar(lancamento: Lancamento): Promise<Lancamento> {
@@ -96,10 +101,10 @@ export class LancamentoService {
 
   private converterStringsParaDatas(lancamentos: Lancamento[]) {
     for (const lancamento of lancamentos) {
-      lancamento.dataVencimento =  moment(lancamento.dataVencimento, 'YYYY-MM-DD').toDate();
+      lancamento.dataVencimento = moment(lancamento.dataVencimento, 'YYYY-MM-DD').toDate();
 
       if (lancamento.dataPagamento) {
-        lancamento.dataPagamento =  moment(lancamento.dataPagamento, 'YYYY-MM-DD').toDate();
+        lancamento.dataPagamento = moment(lancamento.dataPagamento, 'YYYY-MM-DD').toDate();
       }
     }
   }
